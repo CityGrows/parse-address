@@ -571,7 +571,7 @@
       state   : '\\b(?:' + keys(State_Code).concat(values(State_Code)).map(XRegExp.escape).join('|') + ')\\b',
       direct  : values(Directional).sort(function(a,b){return a.length < b.length}).reduce(function(prev,curr){return prev.concat([XRegExp.escape(curr.replace(/\w/g,'$&.')),curr])},keys(Directional)).join('|'),
       dircode : keys(Direction_Code).join("|"),
-      zip     : '^[0-9]{5}(?:-[0-9]{4})?$',
+      zip     : '\\d{5}(?:-?\\d{4})?',
       corner  : '(?:\\band\\b|\\bat\\b|&|\\@)',
     };
 
@@ -705,9 +705,10 @@
           return capitalize(Direction_Code[match.dircode.toUpperCase()]) +' ';
         });
     }
-    // if(parsed.zip){
-    //   parsed.zip = XRegExp.replace(parsed.zip,/^(.{5}).*/,'$1');
-    // }
+    if(parsed.zip){
+      debugger
+      parsed.zip = XRegExp.replace(parsed.zip,/^(.{5}).*/,'$1');
+    }
     return parsed;
   };
 
