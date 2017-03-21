@@ -705,10 +705,7 @@
           return capitalize(Direction_Code[match.dircode.toUpperCase()]) +' ';
         });
     }
-    if(parsed.zip){
-      debugger
-      parsed.zip = XRegExp.replace(parsed.zip,/^(.{5}).*/,'$1');
-    }
+    
     return parsed;
   };
 
