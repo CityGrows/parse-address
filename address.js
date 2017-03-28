@@ -705,7 +705,11 @@
           return capitalize(Direction_Code[match.dircode.toUpperCase()]) +' ';
         });
     }
-    
+
+    for (var key in parsed){
+      parsed[key] = parsed[key] || '';
+    }
+
     return parsed;
   };
 
@@ -743,6 +747,14 @@
     return parts;
   };
 
+  parser.isValidState = function(state){
+    return XRegExp(Addr_Match.state, 'i').test(state);
+  };
+
+  parser.isValidZip = function(zip){
+    return XRegExp(Addr_Match.zip).test(zip);
+  };
+
   // AMD / RequireJS
   if (typeof define !== 'undefined' && define.amd) {
       define([], function () {
@@ -755,6 +767,8 @@
     exports.parseLocation = parser.parseLocation;
     exports.parseInformalAddress = parser.parseInformalAddress;
     exports.parseAddress = parser.parseAddress;
+    exports.isValidState = parser.isValidState;
+    exports.isValidZip = parser.isValidZip;
   }
   // included directly via <script> tag
   else {
